@@ -7,9 +7,9 @@ namespace ExtracaoService
     {
         static void Main(string[] args)
         {
-            var empresas = Environment.GetEnvironmentVariable("Companies");
-            var apiKey = Environment.GetEnvironmentVariable("ApiKey");
-            var limit = Environment.GetEnvironmentVariable("LimitNews");
+            var empresas = Environment.GetEnvironmentVariable("Companies", EnvironmentVariableTarget.Machine);
+            var apiKey = Environment.GetEnvironmentVariable("ApiKey", EnvironmentVariableTarget.Machine);
+            var limit = Environment.GetEnvironmentVariable("LimitNews", EnvironmentVariableTarget.Machine);
             var operational = new Operational();
             operational.ObtainData(empresas, apiKey, limit);
         }

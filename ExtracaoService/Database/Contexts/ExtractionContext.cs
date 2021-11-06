@@ -8,7 +8,7 @@ namespace ExtracaoService.Database.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(Environment.GetEnvironmentVariable("ConnectionString"));
+            optionsBuilder.UseNpgsql(Environment.GetEnvironmentVariable("ConnectionString", EnvironmentVariableTarget.Machine));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
