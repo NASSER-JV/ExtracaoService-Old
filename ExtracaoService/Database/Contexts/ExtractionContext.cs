@@ -1,3 +1,4 @@
+using System;
 using ExtracaoService.Database.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +8,7 @@ namespace ExtracaoService.Database.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(@"Host=localhost;user id=postgres;password=nf231;database=TesteBanco;");
+            optionsBuilder.UseNpgsql(Environment.GetEnvironmentVariable("ConnectionString"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
