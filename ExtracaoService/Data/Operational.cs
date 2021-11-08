@@ -6,20 +6,19 @@ namespace ExtracaoService.Data
 {
     public class Operational
     {
-        public void ObtainData(string empresas, string apikey, string limit)
+        public void ObtainData(string apikey)
         {
-            var empresasSeparadas = empresas.Split(",");
-
-            foreach (var emp in empresasSeparadas)
+            var database = new OperationalDatabase();
+            var companies = database.GetCompanies();
+            foreach (var company in companies)
             {
                 var client = new RestClient("https://financialmodelingprep.com");
-                var request = new RestRequest($"api/v3/stock_news?tickers={emp}&limit={limit}&apikey={apikey}");
+                var request = new RestRequest($"api/v3/stock_news?tickers={company.Codigo}&limit=100&apikey={apikey}");
                 var response = client.Get(request);
                 dynamic responseJson = JsonConvert.DeserializeObject(response.Content);
                 foreach (var obj in responseJson)
                 {
-                    var database = new OperationalDatabase();
-                    database.Insert(obj["symbol"].ToString(), emp.Trim(), obj["title"].ToString(), obj["text"].ToString());
+                    database.InsertNews(company, obj["title"].ToString(), obj["text"].ToString());
                 }
             }
         }

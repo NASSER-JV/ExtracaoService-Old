@@ -11,6 +11,7 @@ namespace ExtracaoService.Database.Models
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Codigo { get; set; }
+        public bool Ativo { get; set; }
         public List<Noticia> Noticias { get; set; }
     }
 }
