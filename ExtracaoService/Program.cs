@@ -1,6 +1,5 @@
-﻿using System;
-using ExtracaoService.Data;
-using Microsoft.Extensions.Configuration;
+﻿using ExtracaoService.Data;
+using ExtracaoService.Utilities;
 
 namespace ExtracaoService
 {

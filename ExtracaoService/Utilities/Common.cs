@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Configuration;
 
-namespace ExtracaoService.Data
+namespace ExtracaoService.Utilities
 {
     public class Common
     {

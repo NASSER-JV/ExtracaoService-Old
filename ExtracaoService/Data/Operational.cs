@@ -1,5 +1,7 @@
+using System.Collections.Generic;
+using System.Text.Json;
+using ExtracaoService.Data.Entities;
 using ExtracaoService.Database.Services;
-using Newtonsoft.Json;
 using RestSharp;
 
 namespace ExtracaoService.Data
@@ -15,10 +17,10 @@ namespace ExtracaoService.Data
                 var client = new RestClient("https://financialmodelingprep.com");
                 var request = new RestRequest($"api/v3/stock_news?tickers={company.Codigo}&limit=100&apikey={apikey}");
                 var response = client.Get(request);
-                dynamic responseJson = JsonConvert.DeserializeObject(response.Content);
+                var responseJson = JsonSerializer.Deserialize<List<NewsDto>>(response.Content);
                 foreach (var obj in responseJson)
                 {
-                    database.InsertNews(company, obj["title"].ToString(), obj["text"].ToString());
+                    database.InsertNews(company, obj.title, obj.text);
                 }
             }
         }
