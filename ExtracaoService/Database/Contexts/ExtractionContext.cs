@@ -1,14 +1,17 @@
 using System;
 using ExtracaoService.Database.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace ExtracaoService.Database.Contexts
 {
     public class ExtractionContext : DbContext
     {
+        public static IConfigurationRoot Config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(Environment.GetEnvironmentVariable("ConnectionString"));
+            optionsBuilder.UseNpgsql(Config["Settings:ExtractionContext"]);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

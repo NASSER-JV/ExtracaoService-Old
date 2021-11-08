@@ -11,9 +11,10 @@ namespace ExtracaoService.Database.Services
         {
             try
             {
-                var empresa = new Empresa();
                 using (var ctx = new ExtractionContext())
                 {
+                    var empresa = new Empresa();
+
                     empresa = ctx.Empresas.FirstOrDefault(s => s.Nome.Contains(nomeEmpresa));
                     if (empresa == null)
                     {
@@ -23,21 +24,18 @@ namespace ExtracaoService.Database.Services
                             Nome = nomeEmpresa,
                         };
 
-                            ctx.Empresas.Add(empresa);
-                            ctx.SaveChanges();
+                        ctx.Empresas.Add(empresa);
+                        ctx.SaveChanges();
                     }
-                }
 
-                var dados = new Noticia
-                {
-                    Titulo = titulo,
-                    Corpo = corpo,
-                    EmpresaId = empresa.Id,
-                };
-                
-                using (var ctx = new ExtractionContext())
-                {
-                    
+
+                    var dados = new Noticia
+                    {
+                        Titulo = titulo,
+                        Corpo = corpo,
+                        EmpresaId = empresa.Id,
+                    };
+
                     ctx.Noticias.Add(dados);
                     ctx.SaveChanges();
                 }
