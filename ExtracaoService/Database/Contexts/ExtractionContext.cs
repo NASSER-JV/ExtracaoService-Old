@@ -1,6 +1,8 @@
 using System;
+using ExtracaoService.Data;
 using ExtracaoService.Database.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace ExtracaoService.Database.Contexts
 {
@@ -8,7 +10,7 @@ namespace ExtracaoService.Database.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(Environment.GetEnvironmentVariable("ConnectionString", EnvironmentVariableTarget.Machine));
+            optionsBuilder.UseNpgsql(Common.Config["Settings:ExtractionContext"]);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

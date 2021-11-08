@@ -1,5 +1,6 @@
 ﻿using System;
 using ExtracaoService.Data;
+using Microsoft.Extensions.Configuration;
 
 namespace ExtracaoService
 {
@@ -7,11 +8,9 @@ namespace ExtracaoService
     {
         static void Main(string[] args)
         {
-            var empresas = Environment.GetEnvironmentVariable("Companies", EnvironmentVariableTarget.Machine);
-            var apiKey = Environment.GetEnvironmentVariable("ApiKey", EnvironmentVariableTarget.Machine);
-            var limit = Environment.GetEnvironmentVariable("LimitNews", EnvironmentVariableTarget.Machine);
+            var apiKey = Common.Config["Settings:ApiKey"];
             var operational = new Operational();
-            operational.ObtainData(empresas, apiKey, limit);
+            operational.ObtainData(apiKey);
         }
     }
 }
