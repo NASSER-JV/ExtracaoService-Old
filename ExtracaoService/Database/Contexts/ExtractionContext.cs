@@ -1,4 +1,5 @@
 using System;
+using ExtracaoService.Data;
 using ExtracaoService.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -7,11 +8,9 @@ namespace ExtracaoService.Database.Contexts
 {
     public class ExtractionContext : DbContext
     {
-        public static IConfigurationRoot Config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(Config["Settings:ExtractionContext"]);
+            optionsBuilder.UseNpgsql(Common.Config["Settings:ExtractionContext"]);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
