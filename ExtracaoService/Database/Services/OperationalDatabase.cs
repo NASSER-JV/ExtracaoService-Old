@@ -35,7 +35,7 @@ namespace ExtracaoService.Database.Services
         {
             using (var ctx = new ExtractionContext())
             {
-                return ctx.Empresas.ToList();
+                return ctx.Empresas.Where(c => c.Ativo).ToList();
             }
         }
     }
