@@ -1,8 +1,6 @@
-using System;
-using ExtracaoService.Data;
 using ExtracaoService.Database.Models;
+using ExtracaoService.Utilities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace ExtracaoService.Database.Contexts
 {
