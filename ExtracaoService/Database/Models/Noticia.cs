@@ -11,6 +11,7 @@ namespace ExtracaoService.Database.Models
         public string? Titulo { get; set; }
         [Column(TypeName = "text")]
         public string Corpo { get; set; }
+        public string Url { get; set; }
         public int EmpresaId { get; set; }
         public Empresa Empresa { get; set; }
     }

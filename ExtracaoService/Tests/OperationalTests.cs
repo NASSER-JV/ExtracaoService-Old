@@ -1,7 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using ExtracaoService.Data.Entities;
 using ExtracaoService.Database.Contexts;
 using ExtracaoService.Database.Models;
 using ExtracaoService.Database.Services;
@@ -48,7 +48,13 @@ namespace ExtracaoService.Tests
             var empresa = ctx.Empresas.Where(e => e.Nome.Contains("Apple")).FirstOrDefault();
             var diaAtual = DateTime.Now.Date;
             var database = new OperationalDatabase();
-            database.InsertNews(empresa, $"teste unitario - {diaAtual}", "teste unitario");
+            var news = new NewsDto()
+            {
+                text = "teste unitario",
+                title = $"teste unitario - {diaAtual}",
+                url = $"teste {diaAtual}"
+            };
+            database.InsertNews(empresa, news);
             Assert.IsTrue(ctx.Noticias.Any(n => n.Titulo == $"teste unitario - {diaAtual}"));
         }
     }

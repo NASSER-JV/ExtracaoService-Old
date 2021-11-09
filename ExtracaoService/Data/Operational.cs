@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using ExtracaoService.Data.Entities;
@@ -20,8 +21,9 @@ namespace ExtracaoService.Data
                 var responseJson = JsonSerializer.Deserialize<List<NewsDto>>(response.Content);
                 foreach (var obj in responseJson)
                 {
-                    database.InsertNews(company, obj.title, obj.text);
+                    database.InsertNews(company, obj);
                 }
+                Console.WriteLine($"Finalizando inserção de notícias da empresa {company.Nome}.");
             }
         }
     }
